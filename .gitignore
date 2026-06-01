@@ -1,0 +1,30 @@
+# ── Model weights (large binary files) ──
+models/CSRNet/weights/
+*.pth
+*.onnx
+
+
+# ── Runtime generated folders ──
+latest_frame/
+recordings/
+exports/
+
+# ── Python cache ──
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ── Environment files (contains secrets) ──
+.env
+.env.local
+
+# ── Database ──
+*.db
+*.sqlite
+
+# ── OS files ──
+.DS_Store
+Thumbs.db
+
+.vscode/
