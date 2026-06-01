@@ -166,15 +166,15 @@ Check ALERT_THRESHOLD values in config.py
 
 ## Tech Stack
 
-| Layer           | Technology             |
-| --------------- | ---------------------- |
-| AI Model        | CSRNet (VGG16 backend) |
-| Deep Learning   | PyTorch 2.0 + CUDA     |
-| Computer Vision | OpenCV 4.8             |
-| Backend API     | FastAPI + PostgreSQL   |
-| Frontend        | React + Vite           |
-| Alerts          | Telegram Bot API       |
-| Mobile Export   | ONNX INT8              |
+| Layer | Technology |
+|-------|-----------|
+| AI Model | CSRNet (VGG16 backend) |
+| Deep Learning | PyTorch 2.0 + CUDA |
+| Computer Vision | OpenCV 4.8 |
+| Backend API | FastAPI + PostgreSQL |
+| Frontend | React + Vite |
+| Alerts | Telegram Bot API |
+| Mobile Export | ONNX INT8 |
 
 ## Version
 
