@@ -127,18 +127,20 @@ This generates ONNX and INT8 quantized models in the exports/ folder.
 
 ## Project Structure
 
+```
 CrowdGuard/
-├── src/ — Core AI pipeline modules
-├── server/ — FastAPI backend server
-├── dashboard_web/ — React frontend dashboard
-├── notifications/ — Telegram alert system
-├── models/CSRNet/ — CSRNet model architecture
-├── main.py — Entry point
-├── config.py — All settings and thresholds
-├── calibrate_scale.py — Venue calibration tool
-├── validate_accuracy.py — Accuracy measurement tool
-├── recording_router.py — Video recording API
-└── ws_publisher.py — WebSocket data publisher
+├── src/                    — Core AI pipeline modules
+├── server/                 — FastAPI backend server
+├── dashboard_web/          — React frontend dashboard
+├── notifications/          — Telegram alert system
+├── models/CSRNet/          — CSRNet model architecture
+├── main.py                 — Entry point
+├── config.py               — All settings and thresholds
+├── calibrate_scale.py      — Venue calibration tool
+├── validate_accuracy.py    — Accuracy measurement tool
+├── recording_router.py     — Video recording API
+└── ws_publisher.py         — WebSocket data publisher
+```
 
 ## Troubleshooting
 
