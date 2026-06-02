@@ -1,3 +1,4 @@
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/45582f68-2653-4381-8bf2-fae17e17636c" />
 # CrowdGuard AI
 
 > AI powered real time crowd density estimation and stampede prevention system designed for temples, college fests, stadiums, and public rallies.
