@@ -1,7 +1,8 @@
-<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/45582f68-2653-4381-8bf2-fae17e17636c" />
-# CrowdGuard AI
+# CrowdGuard: Realtime Crowd Monitoring System 
 
 > AI powered real time crowd density estimation and stampede prevention system designed for temples, college fests, stadiums, and public rallies.
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/45582f68-2653-4381-8bf2-fae17e17636c" />
 
 ---
 
@@ -18,6 +19,41 @@
 
 
 ---
+
+---
+# CrowdGuard Core Features
+
+## Realtime Grid Monitoring
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/4309b082-cfa7-4fe8-9c8c-6606e501c65a" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/899faf1e-23d3-4dc0-bdfb-f3c22cb1b9e6" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/390ac4ae-9f55-4137-943f-2926753397a1" />
+
+---
+
+## CSRNet Density Model 
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/25b44cd0-aef5-4c57-b157-529ee5fcb5d5" />
+
+---
+
+## Telegram Push Alerts
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/ec3bc42a-c5bf-4411-880e-5a25169f4853" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/c433607e-3ba7-4691-8bd4-412d30177ab7" />
+
+---
+
+## Historical Analytics Engine
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/6d1506c7-6502-48e5-8f4d-008abbe13e32" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/c77e5a57-a1ca-43f5-94ee-56bf37f4d3ba" />
+
+---
+
+## Role Based Access Control  
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/00f80ff7-92b0-484b-8cf2-099ec5cb2444" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/5f872d28-7ef3-4aec-aca2-fdebf7e8996d" />
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/85099e89-a8c2-47c5-b8b8-e8fa4285e648" />
+
+---
+
 
 ## System Requirements
 
@@ -247,7 +283,6 @@ CrowdGuard/
 | Alerts | Telegram Bot API |
 | Mobile Export | ONNX INT8 |
 
----
 
 ## Troubleshooting
 
