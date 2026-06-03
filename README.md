@@ -53,7 +53,37 @@
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/85099e89-a8c2-47c5-b8b8-e8fa4285e648" />
 
 ---
+# Additional Features
 
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/c2bfc529-a110-4bd1-a500-a1f9e60b48a7" />
+
+> Configure venue name, type, and crowd capacity; toggle Telegram alerts on/off with a shareable QR code and invite link for safety staff.
+
+---
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/027078d2-5feb-49ec-8d88-02200f709e9d" />
+
+> Adjust CSS alert thresholds with a live color gradient preview — HIGH triggers Telegram alerts, CRITICAL triggers emergency + PA notifications.
+
+---
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/e7625f53-0067-4043-9ab7-c484e930b3cc" />
+
+> Assign custom labels to all 16 grid zones, displayed directly on the live dashboard for easy location identification by safety staff.
+
+---
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/64dffb28-6d9e-4358-b174-7b3c03937946" />
+
+> Set the video source (webcam, file, or RTSP stream) and calibrate the crowd count scale factor; previews the exact config.py changes before saving.
+
+---
+
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/1f14059a-3c40-4f78-b453-2b3508d85ce3" />
+
+> Manage multirole access control — add or remove users with roles like Super Admin, Venue Manager, Security Guard, and Read Only.
+
+---
 
 ## System Requirements
 
