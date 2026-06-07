@@ -201,6 +201,32 @@ TELEGRAM_CHAT_IDS=your_chat_id_here
 
 ## Database Setup
 
+## Database Schema
+
+### alert_events
+
+| Column | Type | Description |
+|----------|----------|----------|
+| id | SERIAL | Primary key |
+| venue_id | VARCHAR | Venue identifier |
+| alert_type | VARCHAR | SURGE / DISPERSAL |
+| severity | VARCHAR | MODERATE / HIGH |
+| tile | VARCHAR | Grid location |
+| css_at_alert | FLOAT | CSS when triggered |
+| timestamp | TIMESTAMP | Alert time |
+
+### crowd_snapshots
+
+| Column | Type | Description |
+|----------|----------|----------|
+| id | SERIAL | Primary key |
+| venue_id | VARCHAR | Venue identifier |
+| total_count | INTEGER | Crowd count |
+| css | FLOAT | Crowd Stress Score |
+| tile_data | JSONB | Grid data |
+| timestamp | TIMESTAMP | Snapshot time |
+
+
 Required for analytics and historical data features. Install PostgreSQL first, then run:
 
 ```bash
