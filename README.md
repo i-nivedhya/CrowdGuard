@@ -11,18 +11,21 @@
 
 ## System Architecture
 
+```text
 Camera Feed
-    ↓
+     ↓
 CSRNet Model
-    ↓
+     ↓
 Density Estimation
-    ↓
+     ↓
 Risk Analysis Engine
-    ↓
+     ↓
 FastAPI Backend
-    ↓
+     ↓
 PostgreSQL Database
-    ↓
+     ↓
+React Dashboard + Telegram Alerts
+```
 React Dashboard + Telegram Alerts
 
 - Realtime crowd counting using CSRNet deep learning model
