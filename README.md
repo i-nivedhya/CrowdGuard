@@ -8,6 +8,23 @@
 
 ## What It Does
 
+
+## System Architecture
+
+Camera Feed
+    ↓
+CSRNet Model
+    ↓
+Density Estimation
+    ↓
+Risk Analysis Engine
+    ↓
+FastAPI Backend
+    ↓
+PostgreSQL Database
+    ↓
+React Dashboard + Telegram Alerts
+
 - Realtime crowd counting using CSRNet deep learning model
 - 4×4 grid spatial risk localization (Green / Yellow / Red zones)
 - Surge and stampede early warning alerts
