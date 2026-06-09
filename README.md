@@ -5,7 +5,43 @@
 <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/45582f68-2653-4381-8bf2-fae17e17636c" />
 
 ---
+## System Architecture
 
+```mermaid
+graph TD
+    %% Define Styles
+    classDef input fill:#000000,stroke:#01579b,stroke-width:2px;
+    classDef model fill:#000000,stroke:#2e7d32,stroke-width:2px;
+    classDef logic fill:#000000,stroke:#ef6c00,stroke-width:2px;
+    classDef output fill:#000000,stroke:#c2185b,stroke-width:2px;
+
+    %% Pipeline Flow
+    Cam([Camera Feed]) --> CSR[CSRNet SHB Model]
+    CSR --> DM[Density Map <br><i>COUNT_SCALE</i>]
+    DM --> Grid[4×4 Grid Engine <br><i>Tile Counts</i>]
+
+    %% Parallel Analysis
+    Grid --> RC[Risk Classifier <br><i>Green / Yellow / Red</i>]
+    Grid --> SD[Surge Detector <br><i>Delta Analysis</i>]
+    Grid --> ZP[Zone Pressure <br><i>Neighbor Weighting</i>]
+
+    %% Aggregation & Output
+    RC --> CSS[CSS Engine <br><i>0–100 Score</i>]
+    SD --> CSS
+    ZP --> CSS
+
+    CSS --> API[FastAPI Backend <br><i>WebSocket + REST</i>]
+    API --> DB[(PostgreSQL Database)]
+    API --> Dash[React Dashboard]
+    API --> Tele[Telegram Alerts]
+
+    %% Apply Styles
+    class Cam input;
+    class CSR,DM model;
+    class Grid,RC,SD,ZP,CSS logic;
+    class API,DB,Dash,Tele output;
+```
+---
 ## What It Does
 
 React Dashboard + Telegram Alerts
@@ -21,38 +57,13 @@ React Dashboard + Telegram Alerts
 
 
 ---
-### How it Does
+## How it Does
+
 - The 4x4 grid gives 16 zones, which is the right balance between spatial granularity and practical usefulness. A 3x3 grid would be only 9 zones too coarse to localise danger precisely. An 8x8 grid of 64 zones would have very small tiles that might not have enough people in each zone to trigger meaningful thresholds. Also, for a safety officer looking at a dashboard, 16 colour coded tiles is the maximum they can process quickly in a high stress situation. With 64 tiles the display becomes too cluttered.
 - Zone pressure is a weighted score that considers not just a tile's own count but also the counts of its neighbours. The formula gives the centre tile a weight of 2.0 and each of its up to 8 neighbours a weight of 1.0. The pressure score is the weighted average. This is important because an isolated yellow tile is much less dangerous than a yellow tile surrounded by other yellow and red tiles. In a real stampede scenario, the dangerous pressure builds across a connected cluster of zones, zone pressure captures this spatial context that a simple per tile threshold would miss.
 - The surge detector maintains a rolling history of the last 15 frame counts for each tile. Every processed frame, it compares the current count to the count from 3 frames ago, this is the 3 frame delta. If the delta exceeds 3 persons AND the tile is already Yellow or Red, a SURGE alert is fired. Using a 3 frame window instead of frame-by-frame comparison smooths out noise from natural crowd movement. The system also detects CASCADE_RISK when zone pressure exceeds 1.5 times the red threshold with a rising count and SUDDEN_DISPERSAL when count drops below 50% of recent value which may indicate a panic scatter event.
 - The Crowd Stress Score is a single number from 0 to 100 that combines four independent safety signals into one metric that non-technical safety officers can immediately act on. The formula is: CSS = 0.35 times the density score, plus 0.30 times the surge score, plus 0.20 times the zone pressure score, plus 0.15 times the motion chaos score. Density is weighted most because it is the most direct measure of danger. Surge is weighted second because rapid crowd growth is the key precursor to stampede. Zone pressure third because spatial context is important. Motion chaos is weighted least because optical flow is noisier than the count-based signals. A score of 0-20 is Normal, 21-40 is Elevated, 41-60 is High, 61-80 is Severe, and 81-100 is Critical. The weights were determined through expert elicitation informed by crowd crush literature, particularly the work of Helbing et al. on the dynamics of crowd disasters. Their research shows that compressive pressure which corresponds to density and zone pressure is the primary physical cause of crowd crush, while rapid ingress which corresponds to surge is the primary trigger. Motion chaos was added based on research showing that disorganised movement is an early behavioural indicator of panic. The weights reflect this hierarchy: density 35%, surge 30%, zone pressure 20%, motion chaos 15%. Data driven weight optimisation through user studies with actual safety officers is identified as future work.
 - Optical flow is a computer vision technique that tracks how pixels move between consecutive frames. I use Lucas-Kanade sparse optical flow, which works by finding good feature points corners and edges using the Shi-Tomasi detector, and then tracking where those points move in the next frame. The movement vectors for all tracked points within each tile are aggregated to give a dominant direction and a speed for that tile. The angular standard deviation of all the flow vectors within a tile gives the chaos score, if all people are moving in roughly the same direction, the standard deviation is low. If people are moving in random directions which happens in panic situations, the standard deviation is high and a CHAOS alert is triggered. Adjacent tiles with directly opposing dominant directions flag a COLLISION ZONE.
----
-## System Architecture
-
-```text
-Camera Feed
-     ↓
-CSRNet SHB Model
-     ↓
-Density Map (COUNT_SCALE)
-     ↓
-4×4 Grid Engine (tile counts)
-     ↓
-Risk Classifier (Green/Yellow/Red)
-     +
-Surge Detector (delta analysis)
-     +
-Zone Pressure (neighbor weighting)
-     +
-CSS Engine (0–100 score)
-     ↓
-FastAPI Backend (WebSocket + REST)
-     ↓
-PostgreSQL Database
-     ↓
-React Dashboard ←→ Telegram Alerts
-```
 ---
 # CrowdGuard Core Features
 
