@@ -8,24 +8,6 @@
 
 ## What It Does
 
-
-## System Architecture
-
-```text
-Camera Feed
-     ↓
-CSRNet Model
-     ↓
-Density Estimation
-     ↓
-Risk Analysis Engine
-     ↓
-FastAPI Backend
-     ↓
-PostgreSQL Database
-     ↓
-React Dashboard + Telegram Alerts
-```
 React Dashboard + Telegram Alerts
 
 - Realtime crowd counting using CSRNet deep learning model
@@ -45,6 +27,32 @@ React Dashboard + Telegram Alerts
 - The surge detector maintains a rolling history of the last 15 frame counts for each tile. Every processed frame, it compares the current count to the count from 3 frames ago, this is the 3 frame delta. If the delta exceeds 3 persons AND the tile is already Yellow or Red, a SURGE alert is fired. Using a 3 frame window instead of frame-by-frame comparison smooths out noise from natural crowd movement. The system also detects CASCADE_RISK when zone pressure exceeds 1.5 times the red threshold with a rising count and SUDDEN_DISPERSAL when count drops below 50% of recent value which may indicate a panic scatter event.
 - The Crowd Stress Score is a single number from 0 to 100 that combines four independent safety signals into one metric that non-technical safety officers can immediately act on. The formula is: CSS = 0.35 times the density score, plus 0.30 times the surge score, plus 0.20 times the zone pressure score, plus 0.15 times the motion chaos score. Density is weighted most because it is the most direct measure of danger. Surge is weighted second because rapid crowd growth is the key precursor to stampede. Zone pressure third because spatial context is important. Motion chaos is weighted least because optical flow is noisier than the count-based signals. A score of 0-20 is Normal, 21-40 is Elevated, 41-60 is High, 61-80 is Severe, and 81-100 is Critical. The weights were determined through expert elicitation informed by crowd crush literature, particularly the work of Helbing et al. on the dynamics of crowd disasters. Their research shows that compressive pressure which corresponds to density and zone pressure is the primary physical cause of crowd crush, while rapid ingress which corresponds to surge is the primary trigger. Motion chaos was added based on research showing that disorganised movement is an early behavioural indicator of panic. The weights reflect this hierarchy: density 35%, surge 30%, zone pressure 20%, motion chaos 15%. Data driven weight optimisation through user studies with actual safety officers is identified as future work.
 - Optical flow is a computer vision technique that tracks how pixels move between consecutive frames. I use Lucas-Kanade sparse optical flow, which works by finding good feature points corners and edges using the Shi-Tomasi detector, and then tracking where those points move in the next frame. The movement vectors for all tracked points within each tile are aggregated to give a dominant direction and a speed for that tile. The angular standard deviation of all the flow vectors within a tile gives the chaos score, if all people are moving in roughly the same direction, the standard deviation is low. If people are moving in random directions which happens in panic situations, the standard deviation is high and a CHAOS alert is triggered. Adjacent tiles with directly opposing dominant directions flag a COLLISION ZONE.
+---
+## System Architecture
+
+```text
+Camera Feed
+     ↓
+CSRNet SHB Model
+     ↓
+Density Map (COUNT_SCALE)
+     ↓
+4×4 Grid Engine (tile counts)
+     ↓
+Risk Classifier (Green/Yellow/Red)
+     +
+Surge Detector (delta analysis)
+     +
+Zone Pressure (neighbor weighting)
+     +
+CSS Engine (0–100 score)
+     ↓
+FastAPI Backend (WebSocket + REST)
+     ↓
+PostgreSQL Database
+     ↓
+React Dashboard ←→ Telegram Alerts
+```
 ---
 # CrowdGuard Core Features
 
